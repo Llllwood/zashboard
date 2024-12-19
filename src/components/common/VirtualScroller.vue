@@ -1,7 +1,7 @@
 <template>
   <div
     ref="parentRef"
-    class="flex h-full w-full overflow-y-auto overscroll-y-none p-2"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 h-full w-full overflow-y-auto overscroll-y-none p-2"
   >
     <div
       :style="{
