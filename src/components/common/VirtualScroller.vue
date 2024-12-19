@@ -20,7 +20,7 @@
           :key="row.key.toString()"
           :data-index="row.index"
           :ref="measureElement"
-          class="w-full" <!-- 确保每个子项的宽度正确 -->
+          class="w-full"
         >
           <slot
             :item="data[row.index]"
