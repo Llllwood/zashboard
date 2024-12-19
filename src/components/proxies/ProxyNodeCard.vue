@@ -29,8 +29,11 @@
       {{ node.name }}
     </div>
     <span
-      :class="`text-xs tracking-tight ${tightMode ? 'absolute bottom-0 right-0 scale-75' : ''}`"
-    >
+      :class="[
+        'text-xs tracking-tight',
+        tightMode? 'absolute bottom-0 right-0 scale-75' : '',
+        active? 'text-type-t' : 'text-type-f'
+    ]">
       {{ typeDescription }}
     </span>
     <LatencyTag
