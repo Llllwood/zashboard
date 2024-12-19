@@ -8,22 +8,27 @@
             :icon="proxyGroup.icon"
           />
           <span class="text-lg font-medium">{{ proxyGroup.name }}</span>
+          <span class="text-xs pg-all">({{ proxyGroup.all?.length }})</span>
+          <span class="text-xs pg-type text-slate-500">: {{ proxyGroup.type }}</span>
           <span
-            class="text-sm"
+            class="text-sm max-sm:hidden"
             v-if="proxyGroup.now"
           >
             -> {{ proxyGroup.now }}
           </span>
         </div>
+        <div class="shrink-0">[{{ prettyBytesHelper(downloadTotal) }}/s]</div>
         <LatencyTag
           :class="twMerge('z-10 bg-base-200/40', isLatencyTesting ? 'animate-pulse' : '')"
           :name="proxyGroup.now"
           @click.stop="handlerLatencyTest"
         />
       </div>
-      <div class="flex items-center gap-2 text-xs text-slate-500">
-        <div class="flex-1">{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</div>
-        <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+      <div
+        class="flex items-center gap-2 text-xs sm:hidden"
+        v-if="proxyGroup.now"
+      >
+        -> {{ proxyGroup.now }}
       </div>
     </template>
     <template v-slot:preview>
