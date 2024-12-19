@@ -16,10 +16,11 @@
         }"
       >
         <div
-          v-for="row in virtualRows"
+          v-for="(row, index) in virtualRows"
           :key="row.key.toString()"
           :data-index="row.index"
           :ref="measureElement"
+          class="w-full" <!-- 确保每个子项的宽度正确 -->
         >
           <slot
             :item="data[row.index]"
@@ -30,6 +31,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { useVirtualizer } from '@tanstack/vue-virtual'
