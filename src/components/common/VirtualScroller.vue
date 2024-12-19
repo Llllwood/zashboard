@@ -5,14 +5,14 @@
   >
     <div
       :style="{
-        height: ${totalSize}px,
+        height: `${totalSize}px`,
       }"
-      class="relative w-full max-sm:min-h-[calc(100%+1px)]"
+      class="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-sm:min-h-[calc(100%+1px)]"
     >
       <div
         class="absolute left-0 top-0 w-full"
         :style="{
-          transform: translateY(${virtualRows[0]?.start ?? 0}px),
+          transform: `translateY(${virtualRows[0]?.start ?? 0}px)`,
         }"
       >
         <div
