@@ -1,26 +1,25 @@
 <template>
   <div
     ref="parentRef"
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 h-full w-full overflow-y-auto overscroll-y-none p-2"
+    class="flex h-full w-full overflow-y-auto overscroll-y-none p-2"
   >
     <div
       :style="{
-        height: `${totalSize}px`,
+        height: ${totalSize}px,
       }"
       class="relative w-full max-sm:min-h-[calc(100%+1px)]"
     >
       <div
         class="absolute left-0 top-0 w-full"
         :style="{
-          transform: `translateY(${virtualRows[0]?.start ?? 0}px)`,
+          transform: translateY(${virtualRows[0]?.start ?? 0}px),
         }"
       >
         <div
-          v-for="(row, index) in virtualRows"
+          v-for="row in virtualRows"
           :key="row.key.toString()"
           :data-index="row.index"
           :ref="measureElement"
-          class="w-full"
         >
           <slot
             :item="data[row.index]"
