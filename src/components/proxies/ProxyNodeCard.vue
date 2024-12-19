@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'relative flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
+        'relative flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
