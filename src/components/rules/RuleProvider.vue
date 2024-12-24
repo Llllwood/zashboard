@@ -1,20 +1,18 @@
 <template>
   <div class="card w-full flex-row items-center gap-2 p-1 px-2 text-sm">
     <div class="flex flex-1 flex-col sm:flex-row">
-      <span class="mr-2 inline-block min-w-4 text-center">{{ index }}.</span>
-      <span class="w-48 flex-1"> {{ ruleProvider.name }} ({{ ruleProvider.ruleCount }}) </span>
-      <div class="flex gap-3 text-slate-500">
-        <span>{{ ruleProvider.behavior }}</span>
-        <span>{{ ruleProvider.vehicleType }}</span>
-        <span>{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>
+      <div class="w-48 block flex-1 text-primary">
+        <span class="text-p-number mr-2">{{ index }}.</span>
+        <span class="text-rp-name">{{ ruleProvider.name }} ({{ ruleProvider.ruleCount }})</span>
+        <span class="text-rp-type">{{ ruleProvider.behavior }}-{{ ruleProvider.vehicleType }}-{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>
+        <button
+        :class="twMerge('text-rp-btn btn btn-circle btn-xs', isUpdating ? 'animate-spin' : '')"
+        @click="updateRuleProviderClickHandler"
+        >
+        <ArrowPathIcon class="h-4 w-4" />
+        </button>
       </div>
     </div>
-    <button
-      :class="twMerge('btn btn-circle btn-sm', isUpdating ? 'animate-spin' : '')"
-      @click="updateRuleProviderClickHandler"
-    >
-      <ArrowPathIcon class="h-4 w-4" />
-    </button>
   </div>
 </template>
 
