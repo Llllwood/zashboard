@@ -1,5 +1,9 @@
 <template>
-  <div :class="twMerge('join w-full p-2', horizontal && 'max-w-96 pb-0')">
+  <div :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row flex-wrap pb-0')">
+    <div
+    :class="twMerge('flex w-logs-l items-center gap-2', horizontal && 'sm:w-auto')"
+     > 
+    <span class="shrink-0 text-sm w-logs-ls"> {{ $t('logLevel') }}: </span>
     <select
       class="join-item select select-bordered select-sm"
       v-model="logLevel"
@@ -10,9 +14,12 @@
         :key="opt"
         :value="opt"
       >
-        {{ opt }}
+        {{ $t(opt) }}
       </option>
     </select>
+    </div>
+    <div :class="twMerge('flex w-logs-f items-center gap-2', horizontal && 'sm:w-auto')">
+    <span class="shrink-0 text-sm w-logs-fi"> {{ $t('filter') }}: </span>
     <TextInput
       type="text"
       v-model="logFilter"
@@ -26,6 +33,7 @@
         class="h-4 w-4"
       />
     </button>
+   </div>
   </div>
 </template>
 
