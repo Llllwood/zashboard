@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'relative flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
+        'relative flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
@@ -19,7 +19,7 @@
     <div
       :class="
         twMerge(
-          'flex-1 whitespace-nowrap text-sm',
+          'flex-1 whitespace-nowrap text-xs md:text-sm',
           truncateProxyName && 'truncate',
           tightMode && 'pr-6',
         )
@@ -29,15 +29,15 @@
       {{ node.name }}
     </div>
     <span
-      :class="`text-xs tracking-tight ${tightMode ? 'absolute bottom-0 right-1 scale-[0.9]' : ''}`"
-    >
+      :class="[
+        'text-xs tracking-tight',
+        tightMode? 'absolute bottom-0 right-0 scale-75' : '',
+        active? 'text-type-t' : 'text-type-f'
+    ]">
       {{ typeDescription }}
     </span>
     <LatencyTag
-      :class="[
-        isLatencyTesting ? 'animate-pulse' : '',
-        tightMode ? 'absolute right-1 top-[2px]' : '',
-      ]"
+      :class="[isLatencyTesting ? 'animate-pulse' : '', tightMode ? 'absolute right-2 top-1' : '']"
       :name="node.name"
       @click.stop="handlerLatencyTest"
     />
@@ -46,8 +46,8 @@
 
 <script setup lang="ts">
 import { isSmallScreen } from '@/helper'
-import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
-import { IPv6test, truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
+import { proxyLatencyTest, proxyMap } from '@/store/proxies'
+import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -80,11 +80,12 @@ const typeFormatter = (type: string) => {
 }
 const typeDescription = computed(() => {
   const type = typeFormatter(node.value.type)
-  const isV6 = IPv6test.value && getIPv6ByName(node.value.name) ? 'v6' : ''
-  const isUDP = node.value.udp ? 'udp' : ''
-  const attr = [isUDP, isV6].filter(Boolean).join('.')
 
-  return [type, attr].filter(Boolean).join(' | ')
+  if (node.value.udp) {
+    return `${type} | udp`
+  }
+
+  return type
 })
 const tightMode = computed(() => isSmallScreen.value && twoColumnNodeForMobile.value)
 const handlerLatencyTest = async () => {
