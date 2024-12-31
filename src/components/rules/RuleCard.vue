@@ -6,6 +6,7 @@
     <span class="text-r-type">
       [{{ rule.type }}]
     </span>
+    <div  class="w-rulecrad-name">
     <span v-if="rule.payload"
           class="text-r-name">
       {{ rule.payload }}
@@ -14,6 +15,7 @@
           class="text-r-size badge badge-sm bg-base-200">
         {{ rule.size }}
     </span>
+    </div>
     <span class="text-r-arrow">
       >
     </span>

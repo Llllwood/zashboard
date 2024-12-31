@@ -31,6 +31,7 @@
         </button>
       </div>
     </div>
+    <div :class="twMerge('w-rules-f', horizontal ? 'w-rules-fh' : '')">
     <TextInput v-model="rulesFilter" />
   </div>
 </template>
