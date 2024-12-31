@@ -120,6 +120,7 @@ const zh: LANG_MESSAGE = {
   splitOverviewPage: '分离概览页',
   showHiddenGroup: '显示隐藏分组',
   showIPAndConnectionInfo: '显示 IP 和连接信息',
+  transparent: '透明度',
   info: '信息',
   error: '错误',
   warning: '警告',

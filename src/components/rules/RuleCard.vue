@@ -1,54 +1,23 @@
 <template>
   <div class="card mb-1 w-full flex-row items-center p-1 px-2 text-sm">
-    <span class="text-r-number mr-2"
-          :style="{
-              display: 'inline-block',
-              width: '.88rem',
-              color: '#696969'
-            }">
+    <span class="text-r-number mr-2">
       {{ index }}.
     </span>
-    <span class="text-r-type"
-          :style="{
-              display: 'inline-block',
-              width: '7rem',
-              'margin-left': '.3rem',
-              'margin-right': '.3rem',
-              'line-height': '1.45rem',
-              color: '#100000'
-        }">
+    <span class="text-r-type">
       [{{ rule.type }}]
     </span>
-        <span v-if="rule.payload" 
-          class="text-r-name"
-          :style="{
-              display: 'inline-block',
-              width: '8rem',
-              'margin-left': '.3rem',
-              color: '#000080'
-              }">
+    <span v-if="rule.payload"
+          class="text-r-name">
       {{ rule.payload }}
     </span>
     <span v-if="typeof rule.size === 'number' && rule.size !== -1"
           class="text-r-size badge badge-sm bg-base-200">
         {{ rule.size }}
     </span>
-      <span class="text-r-arrow"
-          :style="{
-              display: 'inline-block',
-              width: '.5rem',
-              'margin-left': '.3rem',
-              color: '#696969'
-              }">
+    <span class="text-r-arrow">
       >
     </span>
-    <span class="text-r-proxy"
-          :style="{
-              display: 'inline-block',
-              'min-width': '4rem',
-              'margin-left': '1.2rem',
-              ...getStyleFor(rule)
-              }">
+    <span class="text-r-proxy" :style="getStyleFor(rule)">
       {{ rule.proxy }}
     </span>
   </div>

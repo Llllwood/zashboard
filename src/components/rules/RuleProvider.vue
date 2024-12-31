@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-1 w-full flex-row items-center p-1 px-2 text-sm">
+  <div class="card w-full flex-row items-center p-1 px-2 text-sm">
     <div class="flex flex-row">
       <div class="flex items-center">
         <span class="text-p-number mr-2">
