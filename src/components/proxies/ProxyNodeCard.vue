@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { isSmallScreen } from '@/helper/utils'
+import { isMiddleScreen } from '@/helper/utils'
 import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { IPv6test, truncateProxyName, twoColumnProxyGroup } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
@@ -96,7 +96,7 @@ const handlerLatencyTest = async () => {
     isLatencyTesting.value = false
   }
 }
-const tightMode = computed(() => isSmallScreen.value )
+const tightMode = computed(() => isMiddleScreen.value )
 </script>
 
 <style scoped>

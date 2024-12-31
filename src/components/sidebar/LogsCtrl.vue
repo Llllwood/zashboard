@@ -18,7 +18,11 @@
       </option>
     </select>
     </div>
-    <div :class="twMerge('flex w-logs-f items-center gap-2', horizontal && 'sm:w-auto')">
+    <div :class="twMerge(
+    'flex w-logs-f items-center gap-2',
+    horizontal ? 'w-logs-fh' : '',
+    tightMode ? 'w-logs-fht' : ''
+    )">
     <span class="shrink-0 text-sm w-logs-fi"> {{ $t('filter') }}: </span>
     <TextInput
       type="text"
@@ -43,6 +47,10 @@ import { initLogs, isPaused, logFilter, logLevel } from '@/store/logs'
 import { PauseIcon, PlayIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import TextInput from '../common/TextInput.vue'
+import { computed } from 'vue'
+import { isMiddleScreen } from '@/helper/utils'
+
+const tightMode = computed(() => isMiddleScreen.value )
 
 defineProps<{
   horizontal?: boolean
