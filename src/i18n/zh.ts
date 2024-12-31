@@ -120,6 +120,18 @@ const zh: LANG_MESSAGE = {
   splitOverviewPage: '分离概览页',
   showHiddenGroup: '显示隐藏分组',
   showIPAndConnectionInfo: '显示 IP 和连接信息',
+  info: '信息',
+  error: '错误',
+  warning: '警告',
+  debug: '调试',
+  silent: '静默',
+  INFO: '信息',
+  ERROR: '错误',
+  WARNING: '警告',
+  DEBUG: '调试',
+  SILENT: '静默',
+  all: '全部',
+  filter: '筛选',
 }
 
 export default zh

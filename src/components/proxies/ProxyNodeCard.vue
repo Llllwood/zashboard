@@ -3,50 +3,51 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex cursor-pointer flex-col items-start gap-[2px] rounded-md bg-base-200',
+        'relative flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
-        isSmallCard ? 'p-1' : 'p-2',
       )
     "
     :data-tip="node.name"
     @mouseenter="checkTruncation"
   >
-    <div class="flex w-full flex-1 items-center gap-1">
-      <ProxyIcon
-        v-if="node.icon"
-        class="shrink-0"
-        size="small"
-        :icon="node.icon"
-        :fill="active ? 'fill-primary-content' : 'fill-base-content'"
-      />
-      <span
-        :class="twMerge('text-sm', truncateProxyName && 'truncate')"
-        ref="nameRef"
-      >
-        {{ node.name }}
-      </span>
+    <ProxyIcon
+      v-if="node.icon"
+      :icon="node.icon"
+      :fill="active ? 'fill-primary-content' : 'fill-base-content'"
+    />
+    <div
+      :class="
+        twMerge(
+          'flex-1 whitespace-nowrap text-xs md:text-sm',
+          truncateProxyName && 'truncate',
+          tightMode && 'pr-6',
+        )
+      "
+      ref="nameRef"
+    >
+      {{ node.name }}
     </div>
-
-    <div class="flex h-4 w-full items-center justify-between">
-      <span
-        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content' : 'text-slate-500'}`"
-      >
-        {{ typeDescription }}
-      </span>
-      <LatencyTag
-        :class="[isLatencyTesting ? 'animate-pulse cursor-wait' : '', isSmallCard && '!h-4 !w-8']"
-        :name="node.name"
-        @click.stop="handlerLatencyTest"
-      />
-    </div>
+    <span
+      :class="[
+        'text-xs tracking-tight',
+        tightMode ? 'absolute text-type-bottom text-type-right scale-75' : '',
+        active? 'text-type-t' : 'text-type-f'
+    ]">
+      {{ typeDescription }}
+    </span>
+    <LatencyTag
+      :class="['w-8', isLatencyTesting ? 'animate-pulse' : '', tightMode ? 'absolute right-2 top-1' : '']"
+      :name="node.name"
+      @click.stop="handlerLatencyTest"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { PROXY_CARD_SIZE } from '@/config'
+import { isSmallScreen } from '@/helper/utils'
 import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
-import { IPv6test, proxyCardSize, truncateProxyName } from '@/store/settings'
+import { IPv6test, truncateProxyName, twoColumnProxyGroup } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -77,13 +78,12 @@ const typeFormatter = (type: string) => {
 
   return type
 }
-const isSmallCard = computed(() => proxyCardSize.value === PROXY_CARD_SIZE.SMALL)
 const typeDescription = computed(() => {
   const type = typeFormatter(node.value.type)
   const isV6 = IPv6test.value && getIPv6ByName(node.value.name) ? 'IPv6' : ''
-  const isUDP = node.value.xudp ? 'xudp' : node.value.udp ? 'udp' : ''
+  const isUDP = node.value.udp ? 'udp' : ''
 
-  return [type, isUDP, isV6].filter(Boolean).join(isSmallCard.value ? '/' : ' / ')
+  return [type, isUDP, isV6].filter(Boolean).join('/')
 })
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
@@ -96,6 +96,7 @@ const handlerLatencyTest = async () => {
     isLatencyTesting.value = false
   }
 }
+const tightMode = computed(() => isSmallScreen.value )
 </script>
 
 <style scoped>

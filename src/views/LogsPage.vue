@@ -10,10 +10,10 @@
         <div class="card mb-1 block p-2 text-sm">
           <span>{{ item.seq }}</span>
           <span class="mx-2 text-primary">
-            {{ dayjs(item.time).locale(language).format('HH:mm:ss') }}
+            [{{ dayjs(item.time).locale(language).format('YYYY-MM-DD HH:mm:ss') }}]
           </span>
           <span :class="textColorMapForType[item.type as keyof typeof textColorMapForType]">
-            {{ item.type }}
+            [{{ $t(item.type.toUpperCase()) }}]
           </span>
           <span class="ml-2">{{ item.payload }}</span>
         </div>

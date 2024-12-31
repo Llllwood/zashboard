@@ -1,25 +1,26 @@
 <template>
-  <div class="card w-full flex-row items-center gap-2 p-1 px-2 text-sm">
-    <div class="flex flex-1 flex-col sm:flex-row">
-      <div class="flex flex-1 items-center gap-2">
-        <span>{{ index }}.</span>
-        <span>{{ ruleProvider.name }}</span>
-        <span class="badge badge-sm bg-base-200">
+  <div class="card mb-1 w-full flex-row items-center p-1 px-2 text-sm">
+    <div class="flex flex-row">
+      <div class="flex items-center">
+        <span class="text-p-number mr-2">
+          {{ index }}.
+        </span>
+        <span class="text-rp-name">
+          {{ ruleProvider.name }}
+        </span>
+        <span class="text-rp-size badge badge-sm bg-base-200">
           {{ ruleProvider.ruleCount }}
         </span>
-      </div>
-      <div class="flex gap-3 text-slate-500">
-        <span>{{ ruleProvider.behavior }}</span>
-        <span>{{ ruleProvider.vehicleType }}</span>
-        <span>{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>
+        <span class="text-rp-type gap-2 text-slate-500">
+          {{ ruleProvider.behavior }}-{{ ruleProvider.vehicleType }}-{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>
+        <button
+        :class="twMerge('text-rp-btn btn btn-circle btn-sm', isUpdating ? 'animate-spin' : '')"
+        @click="updateRuleProviderClickHandler"
+        >
+        <ArrowPathIcon class="h-4 w-4" />
+        </button>
       </div>
     </div>
-    <button
-      :class="twMerge('btn btn-circle btn-sm', isUpdating ? 'animate-spin' : '')"
-      @click="updateRuleProviderClickHandler"
-    >
-      <ArrowPathIcon class="h-4 w-4" />
-    </button>
   </div>
 </template>
 
