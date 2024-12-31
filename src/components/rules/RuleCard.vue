@@ -6,7 +6,7 @@
     <span class="text-r-type">
       [{{ rule.type }}]
     </span>
-    <div  class="w-rulecrad-name">
+    <div class="w-rulecrad-name">
     <span v-if="rule.payload"
           class="text-r-name">
       {{ rule.payload }}
