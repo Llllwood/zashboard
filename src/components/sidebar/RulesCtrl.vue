@@ -1,5 +1,5 @@
 <template>
-  <div :class="twMerge(`flex flex-col gap-2 p-2`, `${horizontal && 'flex-row pb-0'}`)">
+  <div :class="twMerge(`flex flex-col gap-2 p-2`, horizontal && 'flex-row pb-0', tightMode ? 'flex-col' : '')">
     <div
       :class="twMerge('flex flex-col-reverse gap-2', horizontal && 'flex-row')"
       v-if="ruleProviderList.length"
@@ -31,7 +31,7 @@
         </button>
       </div>
     </div>
-    <div :class="twMerge('w-rules-f', horizontal ? 'w-rules-fh' : '')">
+    <div :class="twMerge('w-rules-f', horizontal ? 'w-rules-fh' : '', tightMode ? 'w-rules-fht' : '')">
     <TextInput v-model="rulesFilter" />
     </div>
   </div>
@@ -43,8 +43,11 @@ import { rulesTabShow } from '@/composables/rules'
 import { RULE_TAB_TYPE } from '@/config'
 import { fetchRules, ruleProviderList, rulesFilter } from '@/store/rules'
 import { twMerge } from 'tailwind-merge'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import TextInput from '../common/TextInput.vue'
+import { isMiddleScreen } from '@/helper/utils'
+
+const tightMode = computed(() => isMiddleScreen.value )
 
 defineProps<{
   horizontal?: boolean
