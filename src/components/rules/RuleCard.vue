@@ -32,6 +32,7 @@
   const colorMap = {
     _default: '#4272FF',
     DIRECT: '#24a824',
+    直接连接: '#24a824',
     REJECT: '#F4606C',
   }
   
